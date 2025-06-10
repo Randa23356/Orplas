@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orplas 2025</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100 min-h-screen">g
+<body class="bg-gray-100 min-h-screen">
     <nav class="bg-blue-700 py-4 shadow">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-white">Orplas 2025</h1>
