@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,12 +12,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->get();
-        return view('dashboard', compact('posts'));
+        $sliders = Slider::orderBy('order')->get();
+        return view('dashboard', compact('posts', 'sliders'));
     }
 
-    // Tidak perlu create() & edit() jika pakai modal di dashboard
-
-    public function store(Request $request)
+    // Konten
+    public function storePost(Request $request)
     {
         $request->validate([
             'title'     => 'required|max:255',
@@ -35,7 +35,7 @@ class PostController extends Controller
         return redirect()->route('dashboard')->with('success', 'Konten berhasil ditambahkan!');
     }
 
-    public function update(Request $request, Post $post)
+    public function updatePost(Request $request, Post $post)
     {
         $request->validate([
             'title'     => 'required|max:255',
@@ -53,9 +53,36 @@ class PostController extends Controller
         return redirect()->route('dashboard')->with('success', 'Konten berhasil diupdate!');
     }
 
-    public function destroy(Post $post)
+    public function destroyPost(Post $post)
     {
         $post->delete();
         return redirect()->route('dashboard')->with('success', 'Konten berhasil dihapus!');
+    }
+
+    // Slider
+    public function storeSlider(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:2048',
+            'order' => 'nullable|integer',
+        ]);
+
+        $path = $request->file('image')->store('sliders', 'public');
+
+        Slider::create([
+            'image' => $path,
+            'order' => $request->order ?? 0,
+        ]);
+
+        return redirect()->route('dashboard')->with([
+            'success' => 'Slider berhasil ditambahkan!',
+            'tab' => 'slider'
+        ]);
+    }
+
+    public function destroySlider(Slider $slider)
+    {
+        $slider->delete();
+        return redirect()->route('dashboard')->with('success', 'Slider berhasil dihapus!');
     }
 }
