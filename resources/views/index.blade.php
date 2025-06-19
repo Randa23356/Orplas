@@ -15,21 +15,41 @@
         stop() {
             clearInterval(this.interval)
             this.interval = null
-        }
+        },
+        startX: 0
     }" x-init="start()" @mouseenter="stop()" @mouseleave="start()"
+        @touchstart="startX = $event.touches[0].clientX"
+        @touchend="
+        let endX = $event.changedTouches[0].clientX;
+        if (startX - endX > 40) {
+            active = (active + 1) % images.length
+        } else if (endX - startX > 40) {
+            active = (active - 1 + images.length) % images.length
+        }
+    "
         class="relative flex flex-col bg-white justify-between overflow-x-hidden"
         style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
         <div class="overflow-hidden w-full relative" style="aspect-ratio:16/9; min-height:180px; max-height:400px;">
             <template x-if="images.length > 0">
-                <div class="h-full w-full bg-cover bg-center transition-all duration-500 rounded-b-lg"
-                    :style="`background-image: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 25%), url('${images[active]}')`">
+                <div class="relative h-full w-full">
+                    <template x-for="(img, idx) in images" :key="idx">
+                        <div class="absolute inset-0 bg-cover bg-center transition-all duration-700 rounded-b-lg"
+                            :class="{
+                                'z-10 translate-x-0 opacity-100': active === idx,
+                                'z-0 -translate-x-full opacity-0': active > idx,
+                                'z-0 translate-x-full opacity-0': active < idx
+                            }"
+                            :style="`background-image: url('${img}')`">
+                        </div>
+                    </template>
                 </div>
             </template>
             <template x-if="images.length > 1">
-                <div class="flex justify-center gap-2 p-5 absolute left-0 right-0 bottom-0">
+                <div class="flex justify-center gap-2 p-5 absolute left-0 right-0 bottom-0 z-20">
                     <template x-for="(img, idx) in images" :key="idx">
-                        <div @click="set(idx)" :class="active === idx ? 'bg-white' : 'bg-white opacity-50'"
-                            class="size-1.5 rounded-full cursor-pointer transition-all"></div>
+                        <div @click="set(idx)" :class="active === idx ? 'bg-gray-800' : 'bg-gray-400 opacity-50'"
+                            class="w-3 h-3 rounded-full cursor-pointer transition-all duration-300 border border-white">
+                        </div>
                     </template>
                 </div>
             </template>
