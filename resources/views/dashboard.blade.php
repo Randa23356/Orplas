@@ -27,21 +27,23 @@
             <div class="flex justify-center">
                 <div class="bg-white p-6 rounded shadow w-full max-w-lg mb-8">
                     <h3 class="text-lg font-bold mb-4 text-red-900">Tambah Konten</h3>
-                    <form action="{{ route('posts.store') }}" method="POST">
+                    <form action="{{ route('post.store') }}" method="POST">
                         @csrf
-                        <div class="mb-4">
-                            <label>Judul</label>
-                            <input type="text" name="title" class="w-full border rounded px-3 py-2" required>
-                        </div>
-                        <div class="mb-4">
-                            <label>Kategori</label>
-                            <input type="text" name="category" class="w-full border rounded px-3 py-2" required>
-                        </div>
-                        <div class="mb-4">
-                            <label>Konten</label>
-                            <textarea name="content" class="w-full border rounded px-3 py-2" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="bg-red-900 text-white px-4 py-2 rounded">Simpan</button>
+                        <!-- Input Judul -->
+                        <input type="text" name="title" class="border p-2 mb-2 w-full" placeholder="Judul" required>
+
+                        <!-- Dropdown Kategori -->
+                        <select name="category" class="border p-2 mb-2 w-full" required>
+                            <option value="">Pilih Kategori</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+
+                        <!-- Konten -->
+                        <textarea name="content" class="border p-2 mb-2 w-full" placeholder="Konten" rows="4" required></textarea>
+
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
                     </form>
                 </div>
             </div>

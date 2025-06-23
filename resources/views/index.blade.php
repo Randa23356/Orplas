@@ -55,6 +55,38 @@
             </template>
         </div>
         <div class="h-5 bg-white"></div>
+        <div>
+            <h2 class="text-[#181111] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">About Us
+            </h2>
+            <p class="text-[#181111] text-base font-normal leading-normal pb-3 pt-1 px-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsum architecto nisi saepe numquam
+                labore nulla nemo esse dolore obcaecati aliquam at ducimus reprehenderit amet excepturi, eum deserunt
+                minus ullam. Delectus autem ullam consectetur voluptates optio quas. Dolorem odit reiciendis commodi.
+                Beatae natus voluptatem similique. Repellat nisi sapiente voluptates quas labore explicabo laudantium,
+                dolor sit non molestiae reprehenderit error voluptas amet quibusdam in dolorem? Unde, autem quam
+                corporis velit nesciunt animi atque vero, earum hic rem placeat incidunt minima! Animi, laboriosam! Eum
+                officiis, velit cupiditate porro odit quae quam dolores voluptas dolor quo nemo inventore, odio
+                voluptates illum veniam tempore provident eligendi ex repudiandae adipisci, sapiente voluptatibus beatae
+                accusamus corrupti. Nesciunt, eligendi doloribus exercitationem repellat, impedit distinctio illum
+                pariatur culpa maiores quae aperiam quo eos minus dicta eius architecto non ullam unde beatae?
+                Consequatur sed facere voluptatum minus suscipit perferendis id, earum nam magni velit explicabo dolorem
+                deserunt saepe similique harum ea reprehenderit debitis dolorum nulla sint, quos ratione voluptatibus
+                quaerat soluta! Ut doloribus mollitia cupiditate minima totam, quibusdam voluptatibus ducimus dolorem
+                vero fugit quam praesentium recusandae fuga velit porro saepe in quod modi provident quo asperiores
+                dolorum. Exercitationem explicabo dicta sint harum nisi soluta sequi id nemo quos cupiditate!
+            </p>
+        </div>
+    </div>
+
+    <!-- Ringkasan About di halaman utama -->
+    <div class="mt-4 px-4">
+        <h2 class="text-lg font-bold mb-2">Tentang Kami</h2>
+        <p class="text-gray-700">
+            {{ Str::limit($aboutText, 100) }}
+        </p>
+        <a href="{{ route('about') }}" class="text-blue-600 hover:underline font-semibold">
+            Selengkapnya &rarr;
+        </a>
     </div>
 
     {{-- Sidebar Navigation --}}

@@ -9,8 +9,15 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->get();
-        $sliders = Slider::orderBy('order')->get();
-        return view('index', compact('posts', 'sliders'));
+        $aboutText = Post::where('category', 'about')->first()?->content ?? '';
+        $sliders = Slider::all(); // Ambil semua slider
+
+        return view('index', compact('aboutText', 'sliders'));
+    }
+
+    public function about()
+    {
+        $about = Post::where('category', 'about')->first();
+        return view('about', compact('about'));
     }
 }

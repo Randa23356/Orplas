@@ -13,7 +13,8 @@ class PostController extends Controller
     {
         $posts = Post::latest()->get();
         $sliders = Slider::orderBy('order')->get();
-        return view('dashboard', compact('posts', 'sliders'));
+        $aboutText = Post::where('category', 'about')->first()->content ?? '';
+        return view('dashboard', compact('posts', 'sliders', 'aboutText'));
     }
 
     // Konten
@@ -84,5 +85,20 @@ class PostController extends Controller
     {
         $slider->delete();
         return redirect()->route('dashboard')->with('success', 'Slider berhasil dihapus!');
+    }
+}
+
+class PublicController extends Controller
+{
+    public function index()
+    {
+        // Ambil post dengan kategori 'about'
+        $aboutText = Post::where('category', 'about')->first()?->content ?? '';
+
+        // Ambil slider jika perlu
+        $sliders = Post::where('category', 'slider')->get();
+
+        // Kirim ke view
+        return view('index', compact('aboutText', 'sliders'));
     }
 }
