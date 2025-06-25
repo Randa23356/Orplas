@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hai Ini ada</h1>
+    <h1>Temporlok</h1>
 </body>
 </html>
