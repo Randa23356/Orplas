@@ -27,17 +27,19 @@
             <div class="flex justify-center">
                 <div class="bg-white p-6 rounded shadow w-full max-w-lg mb-8">
                     <h3 class="text-lg font-bold mb-4 text-red-900">Tambah Konten</h3>
-                    <form action="{{ route('post.store') }}" method="POST">
+                    <form action="{{ route('posts.store') }}" method="POST">
                         @csrf
                         <!-- Input Judul -->
-                        <input type="text" name="title" class="border p-2 mb-2 w-full" placeholder="Judul" required>
+                        <input type="text" name="title" class="border p-2 mb-2 w-full" placeholder="Judul"
+                            required>
 
                         <!-- Dropdown Kategori -->
                         <select name="category" class="border p-2 mb-2 w-full" required>
                             <option value="">Pilih Kategori</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
+                            <option value="about">About</option>
+                            <option value="berita">Berita</option>
+                            <option value="sejarah">Sejarah</option>
+                            <option value="kegiatan">Kegiatan</option>
                         </select>
 
                         <!-- Konten -->
